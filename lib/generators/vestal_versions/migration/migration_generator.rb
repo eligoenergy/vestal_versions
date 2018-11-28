@@ -13,7 +13,6 @@ module VestalVersions
         template 'initializer.rb', 'config/initializers/vestal_versions.rb'
       end
 
-
       def migration_class
         if ActiveRecord::VERSION::MAJOR >= 5
           version = "#{ActiveRecord::VERSION::MAJOR}.#{ActiveRecord::VERSION::MINOR}"

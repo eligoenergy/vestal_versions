@@ -14,9 +14,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'activerecord', '>= 4', '< 6'
   gem.add_dependency 'activesupport', '>= 4', '< 6'
 
-  gem.add_development_dependency 'bundler', '~> 1.17'
+  gem.add_development_dependency 'bundler', '~> 1'
   gem.add_development_dependency 'rake', '~> 12.3'
-  gem.add_development_dependency 'pry', '~> 0.12'
 
   gem.files         = `git ls-files`.split($\)
   gem.test_files    = gem.files.grep(/^spec/)
