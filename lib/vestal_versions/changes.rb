@@ -3,6 +3,9 @@ module VestalVersions
   # dirty attribute changes: string keys and unique, two-element array values.
   module Changes
     extend ActiveSupport::Concern
+
+    RAILS_GTE_5_1 = ActiveRecord.gem_version >= ::Gem::Version.new('5.1')
+
     included do
       Hash.class_eval{ include HashMethods }
 
@@ -48,7 +51,11 @@ module VestalVersions
 			# creation. Incremental changes are reset when the record is saved because they represent
 			# a subset of the dirty attribute changes, which are reset upon save.
 			def incremental_version_changes
-				saved_changes.slice(*versioned_columns)
+        if RAILS_GTE_5_1
+				  saved_changes.slice(*versioned_columns)
+        else
+          changes.slice(*versioned_columns)
+        end
 			end
 
 			# Simply resets the cumulative changes after version creation.
