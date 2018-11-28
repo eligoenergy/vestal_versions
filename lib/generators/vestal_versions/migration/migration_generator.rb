@@ -16,7 +16,7 @@ module VestalVersions
 
       def migration_class
         if ActiveRecord::VERSION::MAJOR >= 5
-          version = Float("#{ActiveRecord::VERSION::MAJOR}.#{ActiveRecord::VERSION::MINOR}")
+          version = "#{ActiveRecord::VERSION::MAJOR}.#{ActiveRecord::VERSION::MINOR}"
           "ActiveRecord::Migration[#{version}]"
         else
           "ActiveRecord::Migration"
