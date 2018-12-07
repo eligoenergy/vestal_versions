@@ -16,12 +16,12 @@ It also namespaces the versions table to "vestal_versions" and includes compatab
 
 == Compatibility
 
-Tested with Active Record 4.1.1 with Ruby 2.1.1
+Tested with Active Record 4 through 5 with Ruby 2.3
 
 == Installation
 
 In the Gemfile:
-  
+
   gem 'vestal_versions', :git => 'git://github.com/neilgupta/vestal_versions'
 
 Next, generate and run the first and last versioning migration you'll ever need:
