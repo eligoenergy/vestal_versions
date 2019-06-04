@@ -11,7 +11,7 @@ module VestalVersions
     belongs_to :versioned, :polymorphic => true
 
     if ActiveRecord::VERSION::MAJOR < 4 || defined?(ProtectedAttributes)
-      attr_accessible :modifications, :number, :user, :tag, :reverted_from
+      attr_accessible :modifications, :number, :user, :tag, :reverted_from, :json_modifications
     end
 
     def self.table_name
@@ -40,7 +40,7 @@ module VestalVersions
     def initial?
       number == 1
     end
-    
+
     # Returns the original version number that this version was.
     def original_number
       if reverted_from.nil?
@@ -53,15 +53,15 @@ module VestalVersions
 
     def restore!
       model = restore
-      
+
       if model
         model.save!
         destroy
       end
-      
+
       model
     end
-    
+
     def restore
       if tag == 'deleted'
         attrs = modifications
