@@ -65,7 +65,9 @@ module VestalVersions
     def update_version
       return create_version unless v = versions.last
       v.modifications_will_change!
-      v.update_attribute(:modifications, v.changes.append_changes(version_changes))
+      modifications = v.changes.append_changes(version_changes))
+      v.update_attribute(:modifications, modifications)
+      v.update_attribute(:json_modifications, modifications)
       reset_version_changes
       reset_version
     end
