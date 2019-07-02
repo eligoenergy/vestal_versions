@@ -27,10 +27,6 @@ module VestalVersions
       self[:modifications]
     end
 
-    unless columns_hash[:modifications].type == :jsonb
-      serialize :modifications, Hash
-    end
-
     # In conjunction with the included Comparable module, allows comparison of version records
     # based on their corresponding version numbers, creation timestamps and IDs.
     def <=>(other)
