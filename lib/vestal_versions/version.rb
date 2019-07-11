@@ -26,7 +26,6 @@ module VestalVersions
     def changes
       self[:modifications]
     end
-    serialize :modifications, Hash
 
     # In conjunction with the included Comparable module, allows comparison of version records
     # based on their corresponding version numbers, creation timestamps and IDs.
@@ -40,7 +39,7 @@ module VestalVersions
     def initial?
       number == 1
     end
-    
+
     # Returns the original version number that this version was.
     def original_number
       if reverted_from.nil?
@@ -53,15 +52,15 @@ module VestalVersions
 
     def restore!
       model = restore
-      
+
       if model
         model.save!
         destroy
       end
-      
+
       model
     end
-    
+
     def restore
       if tag == 'deleted'
         attrs = modifications
