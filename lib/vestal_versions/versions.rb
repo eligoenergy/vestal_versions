@@ -34,14 +34,14 @@ module VestalVersions
     #
     # This is useful for finding what all previous values of an attribute was
     def find_with_attribute(attr)
-      where("#{table_name}.#{connection.quote_column_name('modifications')} like '%#{attr.to_s}%'").to_a
+      where("#{table_name}.#{connection.quote_column_name('modifications')} ? '%#{attr.to_s}%'").to_a
     end
 
     # Returns the last version record that includes a change to the given attribute
     #
     # This is useful for finding what the previous value of an attribute was
     def find_last_with_attribute(attr)
-      where("#{table_name}.#{connection.quote_column_name('modifications')} like '%#{attr.to_s}%'").last
+      where("#{table_name}.#{connection.quote_column_name('modifications')} ? '%#{attr.to_s}%'").last
     end
 
     # Returns a single version associated with the given value. The following formats are valid:
