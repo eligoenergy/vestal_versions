@@ -11,10 +11,10 @@ Gem::Specification.new do |gem|
   gem.homepage    = 'http://github.com/neilgupta/vestal_versions'
   gem.license     = 'MIT'
 
-  gem.add_dependency 'activerecord', '>= 4', '< 6'
-  gem.add_dependency 'activesupport', '>= 4', '< 6'
+  gem.add_dependency 'activerecord', '>= 4', '< 7'
+  gem.add_dependency 'activesupport', '>= 4', '< 7'
 
-  gem.add_development_dependency 'bundler', '~> 1'
+  gem.add_development_dependency 'bundler', '~> 2'
   gem.add_development_dependency 'rake', '~> 12.3'
 
   gem.files         = `git ls-files`.split($\)

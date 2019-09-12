@@ -40,7 +40,7 @@ describe VestalVersions::Versions do
     expect(version.number).to eq(1)
     expect(version).to be_initial
   end
-  
+
   it "sreturn the version number if it is not a revert" do
     expect(user.version).to eq(user.versions.last.original_number)
   end
@@ -53,9 +53,9 @@ describe VestalVersions::Versions do
   it "return the original version if it is a double revert" do
     user.revert_to!(2)
     version = user.version
-    user.update_attributes(:last_name => 'Gates')
+    user.update(:last_name => 'Gates')
     user.revert_to!(version)
     expect(user.versions.last.original_number).to eq(2)
   end
-  
+
 end
