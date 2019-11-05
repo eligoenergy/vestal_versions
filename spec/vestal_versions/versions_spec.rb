@@ -125,15 +125,15 @@ describe VestalVersions::Versions do
 
   it 'provides a version number for any given numeric version value' do
     times.keys.each do |number|
-      expect(subject.versions.number_at(number)).to be_a(Fixnum)
-      expect(subject.versions.number_at(number + 0.5)).to be_a(Fixnum)
+      expect(subject.versions.number_at(number)).to be_a(Integer)
+      expect(subject.versions.number_at(number + 0.5)).to be_a(Integer)
       expect(subject.versions.number_at(number)).to eq(subject.versions.number_at(number + 0.5))
     end
   end
 
   it 'provides a version number for a valid tag' do
     times.keys.map{|n| [n, n.to_s] }.each do |number, tag|
-      expect(subject.versions.number_at(tag)).to be_a(Fixnum)
+      expect(subject.versions.number_at(tag)).to be_a(Integer)
       expect(subject.versions.number_at(tag)).to eq(number)
     end
   end
@@ -155,7 +155,7 @@ describe VestalVersions::Versions do
 
   it "provides a version number for any time after the model's creation" do
     times.each do |number, time|
-      expect(subject.versions.number_at(time + 30.minutes)).to be_a(Fixnum)
+      expect(subject.versions.number_at(time + 30.minutes)).to be_a(Integer)
       expect(subject.versions.number_at(time + 30.minutes)).to eq(number)
     end
   end
