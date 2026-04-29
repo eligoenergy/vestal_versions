@@ -15,10 +15,12 @@ module VestalVersions
 
     private
     # Adds version user attribution, preferring explicit +updated_by+ and
-    # falling back to +config.change_user_actor+ when available.
+    # falling back to +config.retrieve_user_actor+ when available.
     # Only ActiveRecord actors are accepted.
     def version_attributes
-      user_actor = updated_by || VestalVersions.config.change_user_actor&.call(self)
+      resolver = VestalVersions.config.retrieve_user_actor
+      resolved_actor = resolver&.arity == 0 ? resolver.call : resolver&.call(self)
+      user_actor = updated_by || resolved_actor
 
       user_actor = nil unless user_actor.is_a?(ActiveRecord::Base)
 
