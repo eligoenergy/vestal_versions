@@ -18,4 +18,12 @@ describe VestalVersions::Users do
     user.update(:first_name => 'Stephen', :updated_by => updated_by.name)
     expect(user.versions.last.user).to eq(updated_by.name)
   end
+
+  it 'uses change_user_actor when updated_by is nil' do
+    VestalVersions.config.change_user_actor = ->(_record){ updated_by }
+
+    user.update(:first_name => 'Stephen')
+
+    expect(user.versions.last.user).to eq(updated_by)
+  end
 end
