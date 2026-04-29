@@ -18,11 +18,7 @@ module VestalVersions
     # falling back to +config.change_user_actor+ when available.
     # Only ActiveRecord actors are accepted.
     def version_attributes
-      user_actor = updated_by
-      if user_actor.nil?
-        resolver = VestalVersions.config.change_user_actor
-        user_actor = resolver&.call(self)
-      end
+      user_actor = updated_by || VestalVersions.config.change_user_actor&.call(self)
 
       user_actor = nil unless user_actor.is_a?(ActiveRecord::Base)
 
