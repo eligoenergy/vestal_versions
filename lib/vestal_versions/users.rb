@@ -18,7 +18,7 @@ module VestalVersions
     # falling back to +config.retrieve_user_actor+ when available.
     # Only ActiveRecord actors are accepted.
     def version_attributes
-      resolver = VestalVersions.config.retrieve_user_actor
+      resolver = vestal_versions_options[:retrieve_user_actor]
       resolved_actor = resolver&.arity == 0 ? resolver.call : resolver&.call(self)
       user_actor = updated_by || resolved_actor
 
