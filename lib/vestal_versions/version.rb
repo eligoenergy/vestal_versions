@@ -6,7 +6,6 @@ module VestalVersions
   class Version < ActiveRecord::Base
     include Comparable
     include ActiveSupport::Configurable
-    config_accessor :retrieve_user_actor
 
     # Associate polymorphically with the parent record.
     belongs_to :versioned, :polymorphic => true
