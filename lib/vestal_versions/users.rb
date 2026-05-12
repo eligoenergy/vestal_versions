@@ -19,7 +19,14 @@ module VestalVersions
     # Only ActiveRecord actors are accepted.
     def version_attributes
       resolver = vestal_versions_options[:retrieve_user_actor]
-      resolved_actor = resolver&.arity == 0 ? resolver.call : resolver&.call(self)
+      resolved_actor =
+        case resolver&.arity
+        when 0 then resolver.call
+        when 1,-2 then resolver.call(self)
+        when nil then nil
+        else raise "Bad resolver method in condiguration: should not require more than 1 argument"
+        end
+        
       user_actor = updated_by || resolved_actor
 
       user_actor = nil unless user_actor.is_a?(ActiveRecord::Base)
