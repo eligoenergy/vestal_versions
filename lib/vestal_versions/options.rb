@@ -30,6 +30,7 @@ module VestalVersions
 
         class_attribute :vestal_versions_options
         self.vestal_versions_options = options.dup
+        options.delete(:retrieve_user_actor)
 
         options.merge!(
           :as => :versioned,

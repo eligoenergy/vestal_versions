@@ -14,10 +14,24 @@ module VestalVersions
 
 
     private
-    # Overrides the +version_attributes+ method to include user information passed into the
-    # parent object, by way of a +updated_by+ attr_accessor.
+    # Adds version user attribution, preferring explicit +updated_by+ and
+    # falling back to +config.retrieve_user_actor+ when available.
+    # Only ActiveRecord actors are accepted.
     def version_attributes
-      super.merge(:user => updated_by)
+      resolver = vestal_versions_options[:retrieve_user_actor]
+      resolved_actor =
+        case resolver&.arity
+        when 0 then resolver.call
+        when 1,-2 then resolver.call(self)
+        when nil then nil
+        else raise "Bad resolver method in configuration: should not require more than 1 argument"
+        end
+        
+      user_actor = updated_by || resolved_actor
+
+      user_actor = nil unless user_actor.is_a?(ActiveRecord::Base)
+
+      super.merge(:user => user_actor)
     end
   end
 
