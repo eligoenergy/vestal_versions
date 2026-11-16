@@ -11,8 +11,8 @@ Gem::Specification.new do |gem|
   gem.homepage    = 'http://github.com/neilgupta/vestal_versions'
   gem.license     = 'MIT'
 
-  gem.add_dependency 'activerecord', '>= 4', '< 7.3'
-  gem.add_dependency 'activesupport', '>= 4', '< 7.3'
+  gem.add_dependency 'activerecord', '>= 4', '< 8'
+  gem.add_dependency 'activesupport', '>= 4', '< 8'
 
   gem.add_development_dependency 'bundler', '>= 1', '< 3'
   gem.add_development_dependency 'rake', '~> 12.3'
